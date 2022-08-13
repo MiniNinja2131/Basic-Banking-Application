@@ -44,8 +44,11 @@ public class Account {
 
     // Allow the user to see their transaction history 
     void getPreviousTransaction(){
+        // Only show the previous transaction but with a database implemented ~ it will show the whole transaction history of that user
+        // If the previous transaction is a positive integer then the last transaction was a deposit action
 		if(previousTransaction > 0){
 			System.out.println("Deposited: +" + previousTransaction);
+        // If the previous transaction is a negative integer then the last transaction was a withdrawn action
 		}else if(previousTransaction < 0){
 			System.out.println("Withdrawn: -" + Math.abs(previousTransaction));
 		}else{
@@ -55,10 +58,16 @@ public class Account {
 
     // Allow the user to see their current funds after 'x' amount of years with interest added 
     void calculateInterest(int years){
+        // The current bank rate is 1.75%
+        double interestRate = 0.0175;
+        double newBalance = (balance * interestRate * years) + balance;
+        System.out.println("The current interest rate is " + (100 * interestRate) + "%");
+		System.out.println("After " + years + " years, you balance will be: " + newBalance);
 
     }
-    	//Function showing the main menu
-	void showMenu() {
+    
+    //Function showing the main menu
+	void showMenu(){
 		char option = '\0';
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome, " + customerName + "!");
@@ -73,7 +82,7 @@ public class Account {
 		System.out.println("E. Calculate interest");
 		System.out.println("F. Exit");
 		
-		do {
+		do{
 			System.out.println();
 			System.out.println("Enter an option: ");
 			char option1 = scanner.next().charAt(0);
@@ -124,7 +133,7 @@ public class Account {
 				System.out.println("Error: invalid option. Please enter A, B, C, D, or E or access services.");
 				break;
 			}
-		} while(option != 'F');
+		}while(option != 'F');
 		System.out.println("Thank you for banking with us!");
 	}
 }
