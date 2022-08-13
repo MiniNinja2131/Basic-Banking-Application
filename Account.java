@@ -44,7 +44,13 @@ public class Account {
 
     // Allow the user to see their transaction history 
     void getPreviousTransaction(){
-
+		if(previousTransaction > 0){
+			System.out.println("Deposited: +" + previousTransaction);
+		}else if(previousTransaction < 0){
+			System.out.println("Withdrawn: -" + Math.abs(previousTransaction));
+		}else{
+			System.out.println("No transaction found!");
+		}
     }
 
     // Allow the user to see their current funds after 'x' amount of years with interest added 
