@@ -63,12 +63,11 @@ public class Account {
         double newBalance = (balance * interestRate * years) + balance;
         System.out.println("The current interest rate is " + (100 * interestRate) + "%");
 		System.out.println("After " + years + " years, you balance will be: " + newBalance);
-
     }
-    
+
     //Function showing the main menu
 	void showMenu(){
-		char option = '\0';
+		char option = ' ';
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Welcome, " + customerName + "!");
 		System.out.println("Your ID is: " + customerID);
@@ -85,7 +84,9 @@ public class Account {
 		do{
 			System.out.println();
 			System.out.println("Enter an option: ");
+            // If the user enter in a string aka "Hello" ~ grab the first letter and in this case 'H'
 			char option1 = scanner.next().charAt(0);
+            // Convert the letter into upper case ~ so it doesnt matter if the user enter in a lower/upper case letter the system will still work the same
 			option = Character.toUpperCase(option1);
 			System.out.println();
 			
