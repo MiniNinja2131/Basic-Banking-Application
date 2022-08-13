@@ -6,8 +6,6 @@ public class Bank {
         // Manually creating a user account (improvement to be made with database implementation)
 		Account customer = new Account("Bobby Shaw", "A00001");
 		customer.showMenu();
-		
-		
 	}
 
 }
