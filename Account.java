@@ -17,12 +17,12 @@ public class Account {
 
     // Allow the user to enter in a amount that they wish to deposit into their account
     void deposit(int amount){
-        // Validation check to ensure that the users balance cannot go below 0
+        // Validation check to ensure that the user is depositing a amount that is greater than 0
         if(amount > 0){
             balance += amount;
             previousTransaction = amount;
         }else{
-            System.out.println("The amount you wish to deposit was invalid. Please Try again");
+            System.out.println("The amount you wish to deposit was invalid. Please Try again.");
         }
     }
 
@@ -33,7 +33,13 @@ public class Account {
     
     // Allow the user to withdraw the specified amount from their account
     void withdraw(int amount){
-
+        // Validation check to ensure that the users balance cannot go below 0
+        if(amount > 0 && balance - amount >= 0){
+            balance -= amount;
+            previousTransaction = -amount;
+        }else{
+            System.out.println("The amount you wish to withdraw was invalid. Please Try again.");
+        }
     }
 
     // Allow the user to see their transaction history 
