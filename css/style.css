@@ -1,0 +1,55 @@
+body{
+    height: 100%;
+    background-color:#484848 !important;
+}
+
+header .navbar{
+    height: 100%;
+}
+
+.signupContainer{
+    margin: auto;
+    text-align: center;
+    width: 50%;
+    /* Top and Bottom padding = 15px, Left and Right padding = 50px */
+    padding: 15px 50px;
+    background-color:#707070 !important;
+}
+
+.signupForm input{
+    display: inline-block;
+    margin: 10px;
+}
+
+input{
+    padding: 10px 10px;
+}
+
+.signupForm button{
+    display: inline-block;
+    margin: 10px;
+}
+
+button{
+    padding: 5px 5px;
+}
+
+.loginContainer{
+    margin: auto;
+    text-align: center;
+    width: 50%;
+    /* Top and Bottom padding = 15px, Left and Right padding = 50px */
+    padding: 15px 50px;
+    background-color:#707070 !important;
+}
+
+.loginForm input{
+    display: inline-block;
+    margin: 10px;
+}
+
+.loginForm button{
+    display: inline-block;
+    margin: 10px;
+}
+
