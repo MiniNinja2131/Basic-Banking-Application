@@ -1,0 +1,19 @@
+CREATE TABLE customer(
+	customerID int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    fName VARCHAR(32) NOT NULL,
+    lName VARCHAR(32) NOT NULL,
+    dob DATE NOT NULL,
+    houseNo CHAR(4) NOT NULL,
+    postcode CHAR(8) NOT NULL,
+    country VARCHAR(45) NOT NULL,
+    telephone VARCHAR(11) NOT NULL
+);
+
+CREATE TABLE bank(
+	bankID int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    branchName VARCHAR(32) NOT NULL,
+    premiseNo CHAR(4) NOT NULL,
+    postcode CHAR(8) NOT NULL,
+    country VARCHAR(45) NOT NULL,
+    interestRate float NOT NULL
+);
