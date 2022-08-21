@@ -1,4 +1,15 @@
-CREATE TABLE customer(
+CREATE TABLE IF NOT EXISTS bank(
+	bankID int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    branchName VARCHAR(32) NOT NULL,
+    premiseNo CHAR(4) NOT NULL,
+    postcode CHAR(8) NOT NULL,
+    country VARCHAR(45) NOT NULL,
+    interestRate float NOT NULL
+);
+
+INSERT INTO bank (branchName, premiseNo, postcode, country, interestRate) VALUES ("Halifax", "45", "DZ5 7RP", "United Kingdom", 0.185);
+
+CREATE TABLE IF NOT EXISTS customer(
 	customerID int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
     fName VARCHAR(32) NOT NULL,
     lName VARCHAR(32) NOT NULL,
@@ -9,16 +20,7 @@ CREATE TABLE customer(
     telephone VARCHAR(11) NOT NULL
 );
 
-CREATE TABLE bank(
-	bankID int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    branchName VARCHAR(32) NOT NULL,
-    premiseNo CHAR(4) NOT NULL,
-    postcode CHAR(8) NOT NULL,
-    country VARCHAR(45) NOT NULL,
-    interestRate float NOT NULL
-);
-
-CREATE TABLE account(
+CREATE TABLE IF NOT EXISTS account(
 	accountID int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
     customerID int(11),
     bankID int(11),
@@ -26,18 +28,18 @@ CREATE TABLE account(
     FOREIGN KEY (bankID) REFERENCES bank(bankID),
     email VARCHAR(255) NOT NULL,
     username VARCHAR(32) NOT NULL,
-    password LONGTEXT NOT NULL,
+    pwd LONGTEXT NOT NULL,
     balance DECIMAL(15,2) NOT NULL
 );
 
-CREATE TABLE transactionHistory(
+CREATE TABLE IF NOT EXISTS transactionHistory(
 	transactionHistoryID int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
     bankID int(11),
     FOREIGN KEY (bankID) REFERENCES bank(bankID),
     transactionType VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE transaction(
+CREATE TABLE IF NOT EXISTS transaction(
     customerID int(11),
 	transactionHistoryID int(11),
     PRIMARY KEY(customerID, transactionHistoryID),
