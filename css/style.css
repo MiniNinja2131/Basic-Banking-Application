@@ -3,6 +3,12 @@ body{
     background-color:#484848 !important;
 }
 
+p{
+    color: white;
+    font-size: large;
+    font-weight: bold;
+}
+
 header .navbar{
     height: 100%;
 }
@@ -28,7 +34,7 @@ input{
 
 label{
     border: 3px solid white;
-    height:45px;
+    height:48px;
     width: 35%;;
     background: white;
     cursor: pointer;
@@ -46,10 +52,14 @@ select{
 .signupForm button{
     display: inline-block;
     margin: 10px;
+    border-radius: 8px;
+    width:35%;
 }
 
 button{
+    height: 48px;
     padding: 5px 5px;
+    font-weight: bold;
 }
 
 .loginContainer{

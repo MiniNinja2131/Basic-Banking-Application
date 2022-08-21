@@ -38,6 +38,27 @@
 
             <button type ="submit" name="submit"> Sign Up </button>
         </form>
+        <!-- Error handling -->
+        <?php
+            if(isset($_GET["error"])){
+                if($_GET["error"] == "emptyInput"){
+                    echo "<p> Fill in all fields </p>";
+                }else if($_GET["error"] == "invalidUID"){
+                    echo "<p> Invalid Username. Can only contains letters and numbers </p>";
+                }else if($_GET["error"] == "invalidEmail"){
+                    echo "<p> Invalid Email </p>";
+                }else if($_GET["error"] == "passwordDontMatch"){
+                    echo "<p> Password doesn't match </p>";
+                }else if($_GET["error"] == "stmtFailed"){
+                    echo "<p> Something went wrong, try again! </p>";
+                }else if($_GET["error"] == "usernameOrEmailTaken"){
+                    echo "<p> Username or Email already taken </p>";
+                }else if($_GET["error"] == "none"){
+                    echo "<p> You have signed up </p>";
+                }
+                
+            }
+        ?>
     </div>
 
 <?php
