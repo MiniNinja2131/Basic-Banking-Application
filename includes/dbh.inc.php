@@ -2,7 +2,7 @@
 <?php
 
 $serverName = "localhost";
-$dbName = "basicBankDB";
+$dbName = "basicbankdb";
 $dbUsername = "root";
 /* Xampp pass is defaulted to empty */
 $dbPassword = "";

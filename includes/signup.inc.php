@@ -2,7 +2,14 @@
 
 /* Checking if the user got to here using the legit way or not (not = enter the url by themselves to try bypass the security for example) */
 if(isset($_POST["submit"])){
-    /* Information below is used to create  a customer record in the customer table */
+    /* Information below is used to create a bank each branch would need to change this data */
+    $bname = "Halifax";
+    $premiseNo = "45";
+    $branchPostcode = "DZ5 7RP";
+    $branchCountry = "United Kingdom";
+    $interestRate = 0.185;
+    
+    /* Information below is used to create a customer record in the customer table */
     $fName = $_POST["fName"];
     $lName = $_POST["lName"];
     $dob = $_POST["dob"];
@@ -11,8 +18,7 @@ if(isset($_POST["submit"])){
     $country = $_POST["country"];
     $telephone = $_POST["telephone"];
 
-
-    /* Information below is used to create  a account record in the account table */
+    /* Information below is used to create a account record in the account table */
     $email = $_POST["email"];
     $username = $_POST["uid"];
     $pass = $_POST["pwd"];
@@ -52,8 +58,12 @@ if(isset($_POST["submit"])){
         exit();
     }
 
-    /* Creating a customer account */
+    /* Creating a bank record */
+    /*createBank($conn, $bname, $premiseNo, $branchPostcode, $branchCountry, $interestRate);*/ 
+    /* Creating a customer record */
     createCustomer($conn, $fName, $lName, $dob, $houseNo, $postcode, $country, $telephone);
+    /* Creating a account record */
+    createAccount($conn, $fName, $postcode, $fName, $postcode, $email, $username, $password, 0.00);
 
     
 }else{

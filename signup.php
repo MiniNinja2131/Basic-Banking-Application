@@ -9,6 +9,16 @@
 
             <input type="text" name="lName" placeholder="Last Name"><br>
 
+            <input type="date" name="dob" placeholder="Date of Birth"><br>
+
+            <input type="text" name="houseNo" placeholder="House Number"><br>
+
+            <input type="text" name="postcode" placeholder="Postcode"><br>
+
+            <input type="text" name="country" placeholder="Country"><br>
+
+            <input type="text" name="telephone" placeholder="Telephone/Phone number"><br>
+
             <input type="text" name="email" placeholder="Email Address"><br>
 
             <input type="text" name="uid" placeholder="Username"><br>
