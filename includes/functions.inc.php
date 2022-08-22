@@ -181,3 +181,43 @@ function createAccount($conn, $fName, $customerPostcode, $bName, $branchPostcode
     header("location: ../signup.php?error=none");
     /* Successfully created a account record that is linked via the customerID and the bankID */
 }
+
+function emptyInputLogin($uid, $pass){
+    /* (In this scenario true = problem with input, false = no problem with input) */
+    $result = true;
+
+    if(empty($uid) || empty($pass)){
+        $result = true;
+    }else{
+        $result = false;
+    }
+    return $result;
+}
+
+function loginUser($conn, $uid, $pass){
+    /* UIDExists takes in the parameter of the database, username and email and by passing in $uid we can check if the username or email exist in the database */
+    $uidExist = UIDExists($conn, $uid, $uid);
+
+    if($uidExist === false){
+        header("location: ../login.php?error=wrongLogin");
+        exit();
+    }
+
+    /* Since $uidExist is an associative arrary (mysqli_fetch_assoc) it means that to reference to a piece of the data I would use the column name rather than number indexing */
+    $pwdHashed = $uidExist["pwd"];
+    /* Fetching the hashed password from database and checking if the passworded enter matches after it has been hashed as well */
+    $checkPass = password_verify($pass, $pwdHashed);
+
+    /* Incorrect password */
+    if($checkPass === false){
+        header("location: ../login.php?error=wrongLogin");
+        exit();
+    }else if($checkPass === true){
+        /* Allow the user to be logged in for example */
+        session_start();
+        $_SESSION["accountID"] = $uidExist["accountID"];
+        $_SESSION["username"] = $uidExist["username"];
+        header("location: ../index.php");
+        exit();
+    }
+}
