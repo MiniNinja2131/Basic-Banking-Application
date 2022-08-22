@@ -4,7 +4,7 @@
 
     <div class="signupContainer">
         <h2> Sign Up </h2>
-        <form class="signupForm" action="includes/signup.inc.php" method="post">
+        <form class="signupForm" action="../includes/signup.inc.php" method="post">
             <input type="text" name="fName" placeholder="First Name">
 
             <input type="text" name="lName" placeholder="Last Name"><br>
@@ -38,6 +38,7 @@
 
             <button type ="submit" name="submit"> Sign Up </button>
         </form>
+
         <!-- Error handling -->
         <?php
             if(isset($_GET["error"])){
@@ -55,12 +56,11 @@
                     echo "<p> Username or Email already taken </p>";
                 }else if($_GET["error"] == "none"){
                     echo "<p> You have signed up </p>";
-                }
-                
+                } 
             }
         ?>
     </div>
-
+    
 <?php
     require "footer.php";
 ?>
