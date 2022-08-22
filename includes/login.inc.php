@@ -11,13 +11,13 @@ if(isset($_POST["submit"])){
     /* Error handling for user input (In this scenario true = problem with input, false = no problem with input) */
     if(emptyInputLogin($uid, $pass) !== false){
         /* Validation check to ensure that all inputs were filled in */
-        header("location: ../login.php?error=emptyInput");
+        header("location: ../php/login.php?error=emptyInput");
         exit();
     }
 
     loginUser($conn, $uid, $pass);
 }else{
-    header("location: ../login.php");
+    header("location: ../php/login.php");
     exit();
 }
 

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -54,20 +58,22 @@
 
                     <!-- Allow the user to login or register a bank account --> 
                     <ul class="navbar-nav ml-auto">
-                        <!-- Signup Form -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="signup.php"> Sign Up </a>
-                        </li>
-
-                        <!-- Login form -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.php"> Login </a>
-                        </li>
+                        <?php
+                            /* Check if the user is logged in already or not */
+                            if(isset($_SESSION["accountID"])){
+                                /* Account where the user can deposit, transfer and all the other actions here */
+                                echo '<li class="nav-item">  <a class="nav-link" href="#"> Account </a></li>';
+                                /* Log out button if the user is logged in */
+                                echo '<li class="nav-item">  <a class="nav-link" href="../includes/logout.inc.php"> Log Out </a></li>';
+                            }else{
+                                /* Sign up form button on the navigation bar */
+                                echo '<li class="nav-item"><a class="nav-link" href="signup.php"> Sign Up </a></li>';
+                                /* Login form button on the navigation bar */
+                                echo '<li class="nav-item"><a class="nav-link" href="login.php"> Login </a></li>';
+                                
+                            }
+                        ?>
                     </ul>
-                    <!-- Logout  -->
-                    <form class="form-inline my-2 my-lg-0" action="../includes/logout.inc.php" method="post">
-                        <button type="submit" name="logout-submit"> Logout </button>
-                    </form>
                 </div>
             </nav>
         </header>

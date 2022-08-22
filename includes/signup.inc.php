@@ -30,31 +30,31 @@ if(isset($_POST["submit"])){
     /* Error handling for user input (In this scenario true = problem with input, false = no problem with input) */
     if(emptyInputSignup($fName, $lName, $dob, $houseNo, $postcode, $country, $telephone, $email, $username, $pass, $passRepeat) !== false){
         /* Validation check to ensure that all inputs were filled in */
-        header("location: ../signup.php?error=emptyInput");
+        header("location: ../php/signup.php?error=emptyInput");
         exit();
     }
 
     if(invalidUID($username) !== false){
         /* Validation check to ensure that the user has inputted a valid username (only contains letters and numbers) */
-        header("location: ../signup.php?error=invalidUID");
+        header("location: ../php/signup.php?error=invalidUID");
         exit();
     }
 
     if(invalidEmail($email) !== false){
         /* Validation check to ensure that the user has inputted a valid email */
-        header("location: ../signup.php?error=invalidEmail");
+        header("location: ../php/signup.php?error=invalidEmail");
         exit();
     }
 
     if(pwdMatch($pass, $passRepeat) !== false){
         /* Validation check to ensure the password entered is the one they intended to (no typos etc) */
-        header("location: ../signup.php?error=passwordDontMatch");
+        header("location: ../php/signup.php?error=passwordDontMatch");
         exit();
     }
 
     if(UIDExists($conn, $username, $email) !== false){
         /* Validation check to ensure the username or email that the user want is not taken */
-        header("location: ../signup.php?error=usernameOrEmailTaken");
+        header("location: ../php/signup.php?error=usernameOrEmailTaken");
         exit();
     }
 
@@ -68,6 +68,6 @@ if(isset($_POST["submit"])){
     
 }else{
     /* If they try to get to here illegitimately then redirect them back to the sign up page */
-    header("location: ../signup.php");
+    header("location: ../php/signup.php");
     exit();
 }

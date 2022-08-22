@@ -56,7 +56,7 @@ function UIDExists($conn, $username, $email){
 
     /* Check and see if the query contains any errors aka syntax etc */
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../signup.php?error=stmtFailed");
+        header("location: ../php/signup.php?error=stmtFailed");
         exit();
     }
 
@@ -85,7 +85,7 @@ function createCustomer($conn, $fName, $lName, $dob, $houseNo, $postcode, $count
 
     /* Check and see if the query contains any errors aka syntax etc */
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../signup.php?error=stmtFailed");
+        header("location: ../php/signup.php?error=stmtFailed");
         exit();
     }
 
@@ -106,7 +106,7 @@ function createBank($conn, $bName, $premiseNo, $postcode, $country, $interestRat
 
     /* Check and see if the query contains any errors aka syntax etc */
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../signup.php?error=stmtFailed");
+        header("location: ../php/signup.php?error=stmtFailed");
         exit();
     }
 
@@ -125,7 +125,7 @@ function createAccount($conn, $fName, $customerPostcode, $bName, $branchPostcode
     $stmt = mysqli_stmt_init($conn);
     /* Check and see if the query contains any errors aka syntax etc */
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../signup.php?error=stmtFailed");
+        header("location: ../php/signup.php?error=stmtFailed");
         exit();
     }else{
         mysqli_stmt_bind_param($stmt, "ss", $fName, $customerPostcode);
@@ -143,7 +143,7 @@ function createAccount($conn, $fName, $customerPostcode, $bName, $branchPostcode
     $stmt2 = mysqli_stmt_init($conn);
     /* Check and see if the query contains any errors aka syntax etc */
     if(!mysqli_stmt_prepare($stmt2, $sql2)){
-        header("location: ../signup.php?error=stmtFailed");
+        header("location: ../php/signup.php?error=stmtFailed");
         exit();
     }else{
         mysqli_stmt_bind_param($stmt2, "ss", $bName, $branchPostcode);
@@ -163,7 +163,7 @@ function createAccount($conn, $fName, $customerPostcode, $bName, $branchPostcode
  
     /* Check and see if the query contains any errors aka syntax etc */
     if(!mysqli_stmt_prepare($stmt3, $sql3)){
-        header("location: ../signup.php?error=stmtFailed");
+        header("location: ../php/signup.php?error=stmtFailed");
         exit();
     }
 
@@ -178,7 +178,7 @@ function createAccount($conn, $fName, $customerPostcode, $bName, $branchPostcode
     mysqli_stmt_close($stmt);
     mysqli_stmt_close($stmt2);
     mysqli_stmt_close($stmt3);
-    header("location: ../signup.php?error=none");
+    header("location: ../php/signup.php?error=none");
     /* Successfully created a account record that is linked via the customerID and the bankID */
 }
 
@@ -199,7 +199,7 @@ function loginUser($conn, $uid, $pass){
     $uidExist = UIDExists($conn, $uid, $uid);
 
     if($uidExist === false){
-        header("location: ../login.php?error=wrongLogin");
+        header("location: ../php/login.php?error=wrongLogin");
         exit();
     }
 
@@ -210,14 +210,14 @@ function loginUser($conn, $uid, $pass){
 
     /* Incorrect password */
     if($checkPass === false){
-        header("location: ../login.php?error=wrongLogin");
+        header("location: ../php/login.php?error=wrongLogin");
         exit();
     }else if($checkPass === true){
         /* Allow the user to be logged in for example */
         session_start();
         $_SESSION["accountID"] = $uidExist["accountID"];
         $_SESSION["username"] = $uidExist["username"];
-        header("location: ../index.php");
+        header("location: ../php/index.php");
         exit();
     }
 }

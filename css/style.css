@@ -4,7 +4,16 @@ body{
 }
 
 p{
-    color: red;
+    color: white;
+    text-shadow:
+    -2px -2px 0 red,
+    0   -2px 0 red,
+    2px -2px 0 red,
+    2px  0   0 red,
+    2px  2px 0 red,
+    0    2px 0 red,
+   -2px  2px 0 red,
+   -2px  0   0 red;
     font-size: large;
     font-weight: bold;
 }
@@ -50,6 +59,13 @@ select{
 }
 
 .signupForm button{
+    display: inline-block;
+    margin: 10px;
+    border-radius: 8px;
+    width:35%;
+}
+
+.loginForm button{
     display: inline-block;
     margin: 10px;
     border-radius: 8px;
