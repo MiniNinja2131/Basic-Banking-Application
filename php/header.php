@@ -22,7 +22,7 @@
         <title> Basic Banking Application </title>
     </head>
 
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         <!-- Navigation bar -->
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
