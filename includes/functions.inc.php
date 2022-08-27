@@ -308,12 +308,9 @@ function accountExists($conn, $accountID, $username){
     mysqli_stmt_close($stmt);
 }
 
-function transfer($conn, $username, $transferUsername, $amount, $currentBal, $transferBal){
-    /* Finding the transferer account via their username and updating it with the new balance */
-    $transferNewBal = $amount + $transferBal;
-    $newBal = $currentBal - $amount;
-
-    /* Updating transfer new balance (++) */
+function deduct($conn, $username, $amount, $balance){
+    $newBal = $balance - $amount;
+    /* Updating current user new balance (--) */
     $sql = "UPDATE account SET balance = ? WHERE username = ?";
     /* Creating a prepare statement for a little bit more security */
     $stmt = mysqli_stmt_init($conn);
@@ -322,26 +319,18 @@ function transfer($conn, $username, $transferUsername, $amount, $currentBal, $tr
         header("location: ../php/transfer.php?error=stmtFailed");
         exit();
     }else{
-        mysqli_stmt_bind_param($stmt, "is", $transferNewBal, $transferUsername);
+        mysqli_stmt_bind_param($stmt, "is", $newBal, $username);
         mysqli_stmt_execute($stmt);
     }
 
-    /* Updating current user new balance (--) */
-    $sql2 = "UPDATE account SET balance = ? WHERE username = ?";
-    /* Creating a prepare statement for a little bit more security */
-    $stmt2 = mysqli_stmt_init($conn);
-    /* Check and see if the query contains any errors aka syntax etc */
-    if(!mysqli_stmt_prepare($stmt2, $sql2)){
-        header("location: ../php/transfer.php?error=stmtFailed");
-        exit();
-    }else{
-        mysqli_stmt_bind_param($stmt2, "is", $newBal, $username);
-        mysqli_stmt_execute($stmt2);
-    }
+        $_SESSION["balance"] = $newBal;
+        /* Closing all the prepared statement used in the previous queries */
+        mysqli_stmt_close($stmt);
+        header("location: ../php/transfer.php?error=none");
+}
 
-     $_SESSION["balance"] = $newBal;
-     /* Closing all the prepared statement used in the previous queries */
-     mysqli_stmt_close($stmt);
-     mysqli_stmt_close($stmt2);
-     header("location: ../php/transfer.php?error=none");
+function transfer($conn, $username, $transferUsername, $amount, $currentBal, $transferBal){
+    deposit($conn, $transferUsername, $amount, $transferBal);
+    deduct($conn, $username, $amount, $currentBal);
+    header("location: ../php/transfer.php?error=none");
  }

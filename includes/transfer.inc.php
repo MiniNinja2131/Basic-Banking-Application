@@ -10,13 +10,13 @@ if(isset($_POST["submit"])){
     $currentUsername = $userInfo["username"];
     $currentBal = $_SESSION["balance"];
 
+    require_once "../includes/dbh.inc.php";
+    require_once "../includes/functions.inc.php";
+
     $transferUser = accountExists($conn, $transferID, $transferID);
     /* For user readability */
     $transerUsername = $transferUser["username"];
     $transerCurrentBal = $transferUser["balance"];
-
-    require_once "../includes/dbh.inc.php";
-    require_once "../includes/functions.inc.php";
 
     /* Error handling for user input (In this scenario true = problem with input, false = no problem with input) */
     if(emptyTransfer($transferID, $amount) !== false){
@@ -31,7 +31,7 @@ if(isset($_POST["submit"])){
         /* Validation check to the current user has enough money in their account to transfer to another user */
         header("location: ../php/transfer.php?error=exceedAmount");
         exit();
-    }else if(strcmp($currentUsername, $transerUsername) !== 0){
+    }else if(strcmp($currentUsername, $transerUsername) == 0){
         /* Validation check so that the user cannot enter in their own ID */
         header("location: ../php/transfer.php?error=sameID");
         exit();
