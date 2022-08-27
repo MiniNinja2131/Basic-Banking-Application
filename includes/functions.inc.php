@@ -266,3 +266,82 @@ function deposit($conn, $uid, $amount, $currentBal){
     mysqli_stmt_close($stmt);
     header("location: ../php/deposit.php?error=none");
 }
+
+function emptyTransfer($uid, $amount){
+    /* (In this scenario true = problem with input, false = no problem with input) */
+    $result = true;
+
+    if(empty($uid) || empty($amount)){
+        $result = true;
+    }else{
+        $result = false;
+    }
+    return $result;
+}
+
+function accountExists($conn, $accountID, $username){
+    $sql = "SELECT * FROM account WHERE accountID = ? OR username = ?;";
+
+    /* Creating a prepare statement for a little bit more security */
+    $stmt = mysqli_stmt_init($conn);
+
+    /* Check and see if the query contains any errors aka syntax etc */
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        header("location: ../php/transfer.php?error=stmtFailed");
+        exit();
+    }
+
+    /* ss because both username and email are a string */
+    mysqli_stmt_bind_param($stmt, "is", $accountID, $username);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    /* Can be used for both login and signup form */
+    if($row = mysqli_fetch_assoc($resultData)){
+        return $row;
+    }else{
+        $result = false;
+        return $result;
+    }
+
+    mysqli_stmt_close($stmt);
+}
+
+function transfer($conn, $username, $transferUsername, $amount, $currentBal, $transferBal){
+    /* Finding the transferer account via their username and updating it with the new balance */
+    $transferNewBal = $amount + $transferBal;
+    $newBal = $currentBal - $amount;
+
+    /* Updating transfer new balance (++) */
+    $sql = "UPDATE account SET balance = ? WHERE username = ?";
+    /* Creating a prepare statement for a little bit more security */
+    $stmt = mysqli_stmt_init($conn);
+    /* Check and see if the query contains any errors aka syntax etc */
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        header("location: ../php/transfer.php?error=stmtFailed");
+        exit();
+    }else{
+        mysqli_stmt_bind_param($stmt, "is", $transferNewBal, $transferUsername);
+        mysqli_stmt_execute($stmt);
+    }
+
+    /* Updating current user new balance (--) */
+    $sql2 = "UPDATE account SET balance = ? WHERE username = ?";
+    /* Creating a prepare statement for a little bit more security */
+    $stmt2 = mysqli_stmt_init($conn);
+    /* Check and see if the query contains any errors aka syntax etc */
+    if(!mysqli_stmt_prepare($stmt2, $sql2)){
+        header("location: ../php/transfer.php?error=stmtFailed");
+        exit();
+    }else{
+        mysqli_stmt_bind_param($stmt2, "is", $newBal, $username);
+        mysqli_stmt_execute($stmt2);
+    }
+
+     $_SESSION["balance"] = $newBal;
+     /* Closing all the prepared statement used in the previous queries */
+     mysqli_stmt_close($stmt);
+     mysqli_stmt_close($stmt2);
+     header("location: ../php/transfer.php?error=none");
+ }

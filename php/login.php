@@ -17,6 +17,8 @@
                         echo "<p> Fill in all fields </p>";
                     }else if($_GET["error"] == "wrongLogin"){
                         echo "<p> Incorrect Login Information </p>";
+                    }else if($_GET["error"] == "stmtFailed"){
+                        echo "<p> Error 404 Something went wrong ~ </p>";
                     }
                 }
             ?>

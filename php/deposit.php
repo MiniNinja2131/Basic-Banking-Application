@@ -17,10 +17,12 @@
                     if($_GET["error"] == "emptyInput"){
                         echo "<p> Fill in all fields </p>";
                     }else if($_GET["error"] == "invalidAmount"){
-                        echo "<p> Incorrect Login Information </p>";
+                        echo "<p> Enter in a positive number </p>";
                     }else if($_GET["error"] == "stmtFailed"){
                         echo "<p> Error 404 Something went wrong ~ </p>";
-                    }
+                    }else if($_GET["error"] == "none"){
+                        echo "<p> Successful Deposited </p>";
+                    } 
                 }
             ?>
         </div>

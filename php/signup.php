@@ -51,7 +51,7 @@
                     }else if($_GET["error"] == "passwordDontMatch"){
                         echo "<p> Password doesn't match </p>";
                     }else if($_GET["error"] == "stmtFailed"){
-                        echo "<p> Something went wrong, try again! </p>";
+                        echo "<p> Error 404 Something went wrong ~ </p>";
                     }else if($_GET["error"] == "usernameOrEmailTaken"){
                         echo "<p> Username or Email already taken </p>";
                     }else if($_GET["error"] == "none"){

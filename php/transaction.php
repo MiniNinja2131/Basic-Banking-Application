@@ -25,7 +25,7 @@
                 </a><br>
 
                 <a href="interest.php">
-                    <button> Calculate interest </button>
+                    <button> Calculate Interest </button>
                 </a><br>
             </div>
         </div>
