@@ -215,8 +215,7 @@ function loginUser($conn, $uid, $pass){
     }else if($checkPass === true){
         /* Allow the user to be logged in for example */
         session_start();
-        $_SESSION["accountID"] = $uidExist["accountID"];
-        $_SESSION["username"] = $uidExist["username"];
+        $_SESSION["accountInfo"] = $uidExist;
         header("location: ../php/index.php");
         exit();
     }

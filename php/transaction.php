@@ -4,27 +4,27 @@
         <div class="accountContainer">
             <h2> User's Action </h2>
             <div class="userAction">
-                <a href="http://www.google.com/">
+                <a href="checkBalance.php">
                     <button> Check Balance </button>
                 </a><br>
 
-                <a href="http://www.google.com/">
+                <a href="deposit.php">
                     <button> Make Deposit </button>
                 </a><br>
 
-                <a href="http://www.google.com/">
+                <a href="transfer.php">
                     <button> Transfer Money </button>
                 </a><br>
 
-                <a href="http://www.google.com/">
+                <a href="withdraw.php">
                     <button> Withdraw Money </button>
                 </a><br>
 
-                <a href="http://www.google.com/">
+                <a href="transactionHistory.php">
                     <button> View Transaction History </button>
                 </a><br>
 
-                <a href="http://www.google.com/">
+                <a href="interest.php">
                     <button> Calculate interest </button>
                 </a><br>
             </div>

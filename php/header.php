@@ -60,7 +60,7 @@
                     <ul class="navbar-nav ml-auto">
                         <?php
                             /* Check if the user is logged in already or not */
-                            if(isset($_SESSION["accountID"])){
+                            if(isset($_SESSION["accountInfo"])){
                                 /* Account where the user can deposit, transfer and all the other actions here */
                                 echo '<li class="nav-item">  <a class="nav-link" href="transaction.php"> Account </a></li>';
                                 /* Log out button if the user is logged in */
@@ -70,7 +70,6 @@
                                 echo '<li class="nav-item"><a class="nav-link" href="signup.php"> Sign Up </a></li>';
                                 /* Login form button on the navigation bar */
                                 echo '<li class="nav-item"><a class="nav-link" href="login.php"> Login </a></li>';
-                                
                             }
                         ?>
                     </ul>
