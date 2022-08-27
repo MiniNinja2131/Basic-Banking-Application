@@ -2,7 +2,7 @@
     session_start();
     /* Checking if the user got to here using the legit way or not (not = enter the url by themselves to try bypass the security for example) */
     if(isset($_POST["submit"])){
-        $amount = $_POST["depositAmount"];
+        $amount = $_POST["withdrawAmount"];
         $userInfo = $_SESSION["accountInfo"];
         /* For user readability */
         $uid = $userInfo["username"];
@@ -14,17 +14,17 @@
         /* Error handling for user input (In this scenario true = problem with input, false = no problem with input) */
         if(emptyAmount($amount) !== false){
             /* Validation check to ensure the amount is not lefted empty */
-            header("location: ../php/deposit.php?error=emptyInput");
+            header("location: ../php/withdraw.php?error=emptyInput");
             exit();
         }else if(posIntCheck($amount) !== false){
             /* Validation check to ensure the amount entered is a positive int or float */
-            header("location: ../php/deposit.php?error=invalidAmount");
+            header("location: ../php/withdraw.php?error=invalidAmount");
             exit();
         }
-        deposit($conn, $uid, $amount, $currentBal);
-        header("location: ../php/deposit.php?error=none");
+        deduct($conn, $uid, $amount, $currentBal);
+        header("location: ../php/withdraw.php?error=none");
     }else{
-        header("location: ../php/deposit.php");
+        header("location: ../php/withdraw.php");
         exit();
     }
 
