@@ -62,7 +62,7 @@
                             /* Check if the user is logged in already or not */
                             if(isset($_SESSION["accountID"])){
                                 /* Account where the user can deposit, transfer and all the other actions here */
-                                echo '<li class="nav-item">  <a class="nav-link" href="#"> Account </a></li>';
+                                echo '<li class="nav-item">  <a class="nav-link" href="transaction.php"> Account </a></li>';
                                 /* Log out button if the user is logged in */
                                 echo '<li class="nav-item">  <a class="nav-link" href="../includes/logout.inc.php"> Log Out </a></li>';
                             }else{

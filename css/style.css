@@ -92,12 +92,23 @@ button{
     margin: 10px;
 }
 
-.loginForm button{
-    display: inline-block;
-    margin: 10px;
-}
-
 .footer p {
     color: black;
     text-shadow: none;
+}
+
+.accountContainer{
+    margin: auto;
+    text-align: center;
+    width: 50%;
+    /* Top and Bottom padding = 15px, Left and Right padding = 50px */
+    padding: 15px 50px;
+    background-color:#707070 !important;
+}
+
+.userAction button{
+    display: inline-block;
+    margin: 10px;
+    border-radius: 8px;
+    width:35%;
 }
