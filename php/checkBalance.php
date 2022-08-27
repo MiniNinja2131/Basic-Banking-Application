@@ -12,7 +12,7 @@
                     <?php 
                         $userInfo = $_SESSION["accountInfo"];
                         echo "<td>" .$userInfo["accountID"]. "</td>";
-                        echo "<td>" .$userInfo["balance"]. "</td>";
+                        echo "<td>" .$_SESSION["balance"]. "</td>";
                     ?>
                 </tr>
             </table>

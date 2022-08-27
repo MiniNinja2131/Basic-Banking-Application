@@ -6,7 +6,7 @@
             <h2> Sign Up </h2>
             <form class="signupForm" action="../includes/signup.inc.php" method="post">
                 <input type="text" name="fName" placeholder="First Name">
-
+                
                 <input type="text" name="lName" placeholder="Last Name"><br>
 
                 <label for="dobText"> Date of Birth </label>

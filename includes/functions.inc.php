@@ -178,8 +178,8 @@ function createAccount($conn, $fName, $customerPostcode, $bName, $branchPostcode
     mysqli_stmt_close($stmt);
     mysqli_stmt_close($stmt2);
     mysqli_stmt_close($stmt3);
-    header("location: ../php/signup.php?error=none");
     /* Successfully created a account record that is linked via the customerID and the bankID */
+    header("location: ../php/signup.php?error=none");
 }
 
 function emptyInputLogin($uid, $pass){
@@ -216,7 +216,53 @@ function loginUser($conn, $uid, $pass){
         /* Allow the user to be logged in for example */
         session_start();
         $_SESSION["accountInfo"] = $uidExist;
+        $_SESSION["balance"] = $uidExist["balance"];
         header("location: ../php/index.php");
         exit();
     }
+}
+
+function emptyAmount($amount){
+    /* (In this scenario true = problem with input, false = no problem with input) */
+    $result = true;
+
+    if(empty($amount)){
+        $result = true;
+    }else{
+        $result = false;
+    }
+    return $result;
+}
+
+function posIntCheck($amount){
+    /* (In this scenario true = problem with input, false = no problem with input) */
+    $result = true;
+
+    /*  Check if the amount that the user entered is an positive int or float */
+    if((!is_int($amount) OR !is_float($amount)) AND $amount < 0){
+        $result = true;
+    }else{
+        $result = false;
+    }
+    return $result;
+}
+
+function deposit($conn, $uid, $amount, $currentBal){
+   /* Finding the customer account via their username and updating it with the new balance */
+   $newBal = $amount + $currentBal;
+   $sql = "UPDATE account SET balance = ? WHERE username = ?";
+   /* Creating a prepare statement for a little bit more security */
+   $stmt = mysqli_stmt_init($conn);
+   /* Check and see if the query contains any errors aka syntax etc */
+   if(!mysqli_stmt_prepare($stmt, $sql)){
+       header("location: ../php/deposit.php?error=stmtFailed");
+       exit();
+   }else{
+       mysqli_stmt_bind_param($stmt, "is", $newBal, $uid);
+       mysqli_stmt_execute($stmt);
+   }
+    $_SESSION["balance"] = $newBal;
+    /* Closing all the prepared statement used in the previous queries */
+    mysqli_stmt_close($stmt);
+    header("location: ../php/deposit.php?error=none");
 }
