@@ -5,6 +5,7 @@
 ?>
 
         <div class="accountContainer">
+            <h2> Transaction History </h2>
             <table>
                 <tr>
                     <th> Transaction ID</th>
@@ -22,7 +23,6 @@
                             echo "<td>".($row_users['transactionType'])."</td>";
                             echo "<td>".($row_users['transactionDate'])."</td>";
                         echo "</tr>";
-    
                     }
                 ?>
             </table>

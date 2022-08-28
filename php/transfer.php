@@ -3,6 +3,7 @@
 ?>
         
         <div class="accountContainer">
+            <h2> Transferring Money </h2>
             <form class="transferForm" action="../includes/transfer.inc.php" method="post">
                 <label for="transferAccountLabel"> Enter in their Username or Account ID </label>
 

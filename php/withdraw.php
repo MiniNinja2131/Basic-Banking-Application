@@ -3,6 +3,7 @@
 ?>
 
         <div class="accountContainer">
+            <h2> Withdrawing Money </h2>
             <form class="loginForm" action="../includes/withdraw.inc.php" method="post">
                 <label for="transferAmountLabel"> Enter in the amount </label>
 

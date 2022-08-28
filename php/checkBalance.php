@@ -3,6 +3,7 @@
 ?>
 
         <div class="accountContainer">
+            <h2> User's Balance </h2>
             <table>
                 <tr>
                     <th> Account ID </th>
