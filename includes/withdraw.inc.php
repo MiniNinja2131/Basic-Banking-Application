@@ -22,6 +22,11 @@
             exit();
         }
         deduct($conn, $uid, $amount, $currentBal);
+
+        $bankID = $_SESSION["bankID"];
+        $customerID = $userInfo["customerID"];
+        /* Creating a transaction history for the user transferring their money to a different user */
+        createTransactionHistory($conn, $bankID, $customerID, "WITHDRAWN");
         header("location: ../php/withdraw.php?error=none");
     }else{
         header("location: ../php/withdraw.php");

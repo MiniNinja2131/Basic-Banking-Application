@@ -22,6 +22,11 @@
             exit();
         }
         deposit($conn, $uid, $amount, $currentBal);
+        
+        $bankID = $_SESSION["bankID"];
+        $customerID = $userInfo["customerID"];
+        /* Creating a transaction history for the user depositing in their money */
+        createTransactionHistory($conn, $bankID, $customerID, "DEPOSIT");
         header("location: ../php/deposit.php?error=none");
     }else{
         header("location: ../php/deposit.php");

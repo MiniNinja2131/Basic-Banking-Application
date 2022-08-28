@@ -119,7 +119,7 @@
     }
 
     function createAccount($conn, $fName, $customerPostcode, $bName, $branchPostcode, $email, $username, $password, $balance){
-        /* Finding the customer id with the following information: first name + postcode */
+        /* Finding the customer id with the following information: first name + postcode but to ensure that its the right user when creating a account, we could add more checks for example AND telephone etc */
         $sql = "SELECT customerID FROM customer WHERE fName = ? AND postcode = ?;";
         /* Creating a prepare statement for a little bit more security */
         $stmt = mysqli_stmt_init($conn);
@@ -217,6 +217,8 @@
             session_start();
             $_SESSION["accountInfo"] = $uidExist;
             $_SESSION["balance"] = $uidExist["balance"];
+            /* In reality, this would be changed depending on which branch the bank is in but for simplicity I decided to have only 1 bank */
+            $_SESSION["bankID"] = $uidExist["bankID"];
             header("location: ../php/index.php");
             exit();
         }
@@ -332,5 +334,43 @@
         deposit($conn, $transferUsername, $amount, $transferBal);
         deduct($conn, $username, $amount, $currentBal);
         header("location: ../php/transfer.php?error=none");
+    }
+
+    function createTransactionHistory($conn, $bankID, $customerID, $transactionType){
+        $sql = "INSERT INTO transactionhistory (bankID, customerID, transactionType) VALUES (?, ?, ?);";
+
+        /* Creating a prepare statement for a little bit more security */
+        $stmt = mysqli_stmt_init($conn);
+
+        /* Check and see if the query contains any errors aka syntax etc */
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header("location: ../php/transaction.php?error=stmtFailed");
+            exit();
+        }
+        mysqli_stmt_bind_param($stmt, "iis", $bankID, $customerID, $transactionType);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        /* Successfully created a transation record */
+    }
+
+    function getTransactionHistory($conn, $customerID){
+        $sql = "SELECT * FROM transactionhistory WHERE customerID = ?;";
+
+        /* Creating a prepare statement for a little bit more security */
+        $stmt = mysqli_stmt_init($conn);
+
+        /* Check and see if the query contains any errors aka syntax etc */
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header("location: ../php/transaction.php?error=stmtFailed");
+            exit();
+        }
+
+        mysqli_stmt_bind_param($stmt, "i", $customerID);
+        mysqli_stmt_execute($stmt);
+
+        $resultData = mysqli_stmt_get_result($stmt);
+        mysqli_stmt_close($stmt);
+        return $resultData;
     }
 

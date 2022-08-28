@@ -32,12 +32,12 @@ CREATE TABLE IF NOT EXISTS account(
     balance DECIMAL(15,2) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS transaction(
-    transactionHistoryID int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+CREATE TABLE IF NOT EXISTS transactionHistory(
+    transactionID int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
     bankID int(11),
     customerID int(11),
     FOREIGN KEY (bankID) REFERENCES bank(bankID),
     FOREIGN KEY (customerID) REFERENCES customer(customerID),
     transactionType VARCHAR(255) NOT NULL,
-    date DATETIME NOT NULL
+    transactionDate DATETIME NOT NULL DEFAULT NOW()
 );

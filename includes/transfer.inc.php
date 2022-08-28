@@ -17,6 +17,7 @@
         /* For user readability */
         $transerUsername = $transferUser["username"];
         $transerCurrentBal = $transferUser["balance"];
+        $transferCustomerID = $transferUser["customerID"];
 
         /* Error handling for user input (In this scenario true = problem with input, false = no problem with input) */
         if(emptyTransfer($transferID, $amount) !== false){
@@ -38,6 +39,13 @@
         }
 
         transfer($conn, $currentUsername, $transerUsername, $amount, $currentBal, $transerCurrentBal);
+
+        $bankID = $_SESSION["bankID"];
+        $customerID = $userInfo["customerID"];
+        /* Creating a transaction history for the user transferring their money to a different user */
+        createTransactionHistory($conn, $bankID, $customerID, "TRANSFERRED");
+        /* Creating a history for the other user to let them know that they have received the money */
+        createTransactionHistory($conn, $bankID, $transferCustomerID, "RECEIVED");
     }else{
         header("location: ../php/transfer.php");
         exit();
